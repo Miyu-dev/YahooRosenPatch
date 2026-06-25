@@ -1,0 +1,5 @@
+.gradle/
+patches/build/
+tmp/
+transit-patched.apk
+*.apk
