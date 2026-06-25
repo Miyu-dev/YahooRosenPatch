@@ -151,9 +151,12 @@ private val SET_GONE = """
     invoke-virtual {p0, v0}, Landroid/view/View;->setVisibility(I)V
 """.trimIndent()
 
-/** kotlin.Unit を即時返却し、広告表示ロジック全体をスキップする。 */
+/**
+ * kotlin.Unit を即時返却し、広告表示ロジック全体をスキップする。
+ * R8 難読化: kotlin.Unit → kotlin.j, INSTANCE → a (v7.40.2 固定)
+ */
 private val RETURN_UNIT = """
-    sget-object v0, Lkotlin/Unit;->INSTANCE:Lkotlin/Unit;
+    sget-object v0, Lkotlin/j;->a:Lkotlin/j;
     return-object v0
 """.trimIndent()
 
