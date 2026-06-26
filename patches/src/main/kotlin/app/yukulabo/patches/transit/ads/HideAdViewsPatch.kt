@@ -5,7 +5,13 @@ import app.morphe.patcher.Fingerprint
 import app.morphe.patcher.extensions.InstructionExtensions.addInstructions
 import app.morphe.patcher.extensions.InstructionExtensions.instructions
 import app.morphe.patcher.patch.bytecodePatch
+import app.morphe.patcher.util.proxy.mutableTypes.MutableMethod
+import app.morphe.patcher.util.proxy.mutableTypes.MutableMethod.Companion.toMutable
+import com.android.tools.smali.dexlib2.AccessFlags
 import com.android.tools.smali.dexlib2.Opcode
+import com.android.tools.smali.dexlib2.builder.MutableMethodImplementation
+import com.android.tools.smali.dexlib2.immutable.ImmutableMethod
+import com.android.tools.smali.dexlib2.immutable.ImmutableMethodParameter
 
 /*
  * Yahoo! 乗換案内 広告 View 除去パッチ
@@ -206,6 +212,49 @@ internal object YdnAdShowFingerprint : Fingerprint(
 )
 
 // ---------------------------------------------------------------------------
+// Fingerprints — Strategy F: バナー広告の生成/表示を断つ
+//
+// 時刻表(fragment_timetable_top)・運行情報(fragment_diainfo)等の下部広告は、
+// 専用の広告 View クラスではなく、汎用 RelativeLayout コンテナ(id=AdView_Bottom)
+// に対し共有ヘルパー g9.a が YJBannerAdView(a6.c) を生成・addView して表示する。
+// この経路は View 単位の非表示(A〜E)では捕捉できない。
+//
+//   g9.a.f(Context, String, String, boolean, RelativeLayout, x6.b)
+//       = a6.c を new して relativeLayout.addView し広告リクエストする本体
+//   g9.a.g(Context, String, boolean, RelativeLayout)
+//       = f(...) を呼ぶ薄いラッパー。時刻表(p0)・運行情報(n8.q)が呼ぶ入口
+//
+// 両方を return-void で無効化する。g9.a.e() は this.g を null チェックしてから
+// 使うため、ad view を生成しなくても NPE にならない（確認済み）。
+// ---------------------------------------------------------------------------
+
+internal object BannerAdRenderFingerprint : Fingerprint(
+    definingClass = "Lg9/a;",
+    name = "f",
+    returnType = "V",
+    parameters = listOf(
+        CTX,
+        "Ljava/lang/String;",
+        "Ljava/lang/String;",
+        "Z",
+        "Landroid/widget/RelativeLayout;",
+        "Lx6/b;",
+    ),
+)
+
+internal object BannerAdShowFingerprint : Fingerprint(
+    definingClass = "Lg9/a;",
+    name = "g",
+    returnType = "V",
+    parameters = listOf(
+        CTX,
+        "Ljava/lang/String;",
+        "Z",
+        "Landroid/widget/RelativeLayout;",
+    ),
+)
+
+// ---------------------------------------------------------------------------
 // Smali snippets
 // ---------------------------------------------------------------------------
 
@@ -226,6 +275,42 @@ private val RETURN_UNIT = """
 
 /** void を返す show メソッドを即時 return して無効化する。 */
 private val RETURN_VOID = "return-void"
+
+// ---------------------------------------------------------------------------
+// Strategy E: setVisibility(int) override で GONE を強制
+//
+// 広告 View の多くは XML レイアウトに埋め込まれ、DataBinding が
+// View.setVisibility(int) を直接呼んで表示する（時刻表・運行情報など）。
+// この経路はコンストラクタ注入(A)・enum オーバーロード無効化(D)では
+// 捕捉できない。そこで各 View に setVisibility(I)V override を追加し、
+// 引数を無視して常に GONE(8) を super に渡す。これにより:
+//   - DataBinding / 外部 / 内部 (getRoot()==this) いずれの再表示も無効化
+//   - 子 View (ProgressBar 等の読み込み表示) ごと領域が消える
+//
+// 各 View の直接の親クラス（invoke-super 先）:
+// ---------------------------------------------------------------------------
+private const val FRAME = "Landroid/widget/FrameLayout;"
+private const val REL = "Landroid/widget/RelativeLayout;"
+private const val CLL = "Ljp/co/yahoo/android/apps/transit/ui/view/CustomLinearLayout;"
+private const val CCL = "Ljp/co/yahoo/android/apps/transit/ui/view/CustomConstraintLayout;"
+
+/** (広告 View クラス, その直接の親クラス) のペア。 */
+private val AD_VIEW_SUPERS =
+    listOf(
+        "StationAdTopView;" to FRAME,
+        "StationAdBottomView;" to CLL,
+        "RailAdView;" to FRAME,
+        "MyPageAdView;" to FRAME,
+        "DiainfoDetailAdView;" to FRAME,
+        "ReservationAdView;" to CCL,
+        "YdnAdView;" to CCL,
+        "YdnAdAutoSizeView;" to CCL,
+        "NaviSearchAdView;" to FRAME,
+        "SearchResultListBottomAdView;" to REL,
+        "YdnInfeed001ImageSize600View;" to CCL,
+        "YdnInfeed002FullWidthImageView;" to CCL,
+        "YdaTextLarge;" to CCL,
+    )
 
 // ---------------------------------------------------------------------------
 // Patch definition
@@ -282,5 +367,46 @@ val hideAdViewsPatch =
             ).forEach { fp ->
                 fp.method.addInstructions(0, RETURN_VOID)
             }
+
+            // Strategy E: setVisibility(int) override を各広告 View に追加し GONE 強制
+            AD_VIEW_SUPERS.forEach { (cls, sup) ->
+                val classType = AD_PKG + cls
+                val mutableClass = mutableClassDefByOrNull(classType) ?: return@forEach
+                // 既に setVisibility(I)V が存在する場合は二重定義を避ける
+                if (mutableClass.methods.any {
+                        it.name == "setVisibility" &&
+                            it.parameterTypes == listOf("I") &&
+                            it.returnType == "V"
+                    }
+                ) {
+                    return@forEach
+                }
+                val override =
+                    ImmutableMethod(
+                        classType,
+                        "setVisibility",
+                        listOf(ImmutableMethodParameter("I", null, null)),
+                        "V",
+                        AccessFlags.PUBLIC.value,
+                        null,
+                        null,
+                        MutableMethodImplementation(2),
+                    ).toMutable()
+                override.addInstructions(
+                    0,
+                    """
+                        const/16 p1, 0x8
+                        invoke-super {p0, p1}, $sup->setVisibility(I)V
+                        return-void
+                    """.trimIndent(),
+                )
+                mutableClass.methods.add(override)
+            }
+
+            // Strategy F: バナー広告の生成/表示(g9.a)を return-void で無効化
+            // （AdView_Bottom 等の汎用コンテナに YJBannerAdView を addView する経路を断つ。
+            //   時刻表・運行情報の下部広告など）
+            BannerAdRenderFingerprint.methodOrNull?.addInstructions(0, RETURN_VOID)
+            BannerAdShowFingerprint.methodOrNull?.addInstructions(0, RETURN_VOID)
         }
     }
