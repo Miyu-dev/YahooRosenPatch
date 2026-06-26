@@ -1,0 +1,32 @@
+package androidx.compose.material3;
+
+import kotlin.Metadata;
+import kotlin.coroutines.jvm.internal.ContinuationImpl;
+
+/* JADX INFO: compiled from: TimePicker.kt */
+/* JADX INFO: loaded from: C:\ClaudeWork\YahoRsen\YahooRosenPatch\tmp\patching-1782388517898\patched\originalDex\classes.dex */
+@ej.c(c = "androidx.compose.material3.TimePickerState", f = "TimePicker.kt", l = {621, 629, 630, 633}, m = "onTap$material3_release")
+@Metadata(k = 3, mv = {1, 8, 0}, xi = androidx.appcompat.R.styleable.AppCompatTheme_checkboxStyle)
+public final class TimePickerState$onTap$1 extends ContinuationImpl {
+    float F$0;
+    float F$1;
+    float F$2;
+    Object L$0;
+    Object L$1;
+    boolean Z$0;
+    int label;
+    /* synthetic */ Object result;
+    final /* synthetic */ TimePickerState this$0;
+
+    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
+    public TimePickerState$onTap$1(TimePickerState timePickerState, dj.c<? super TimePickerState$onTap$1> cVar) {
+        super(cVar);
+        this.this$0 = timePickerState;
+    }
+
+    public final Object invokeSuspend(Object obj) {
+        this.result = obj;
+        this.label |= Integer.MIN_VALUE;
+        return this.this$0.onTap$material3_release(0.0f, 0.0f, 0.0f, false, this);
+    }
+}

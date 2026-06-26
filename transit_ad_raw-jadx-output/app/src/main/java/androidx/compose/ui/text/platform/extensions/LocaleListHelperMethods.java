@@ -1,0 +1,52 @@
+package androidx.compose.ui.text.platform.extensions;
+
+import android.text.style.LocaleSpan;
+import androidx.annotation.DoNotInline;
+import androidx.annotation.RequiresApi;
+import androidx.compose.ui.text.intl.Locale;
+import androidx.compose.ui.text.intl.LocaleList;
+import androidx.compose.ui.text.platform.AndroidTextPaint;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Iterator;
+import jj.a;
+import kotlin.Metadata;
+import kotlin.jvm.internal.m;
+
+/* JADX INFO: compiled from: LocaleExtensions.android.kt */
+/* JADX INFO: loaded from: C:\ClaudeWork\YahoRsen\YahooRosenPatch\tmp\patching-1782388517898\patched\originalDex\classes.dex */
+@RequiresApi(24)
+@Metadata(d1 = {"\u0000\u001e\n\u0002\u0018\u0002\n\u0002\u0010\u0000\n\u0002\u0018\u0002\n\u0002\b\u0002\n\u0002\u0018\u0002\n\u0000\n\u0002\u0018\u0002\n\u0002\b\u0004\bÁ\u0002\u0018\u00002\u00020\u0001B\t\b\u0002¢\u0006\u0004\b\t\u0010\nJ\u0010\u0010\u0004\u001a\u00020\u00012\u0006\u0010\u0003\u001a\u00020\u0002H\u0007J\u0018\u0010\b\u001a\u00020\u00072\u0006\u0010\u0006\u001a\u00020\u00052\u0006\u0010\u0003\u001a\u00020\u0002H\u0007¨\u0006\u000b"}, d2 = {"Landroidx/compose/ui/text/platform/extensions/LocaleListHelperMethods;", "", "Landroidx/compose/ui/text/intl/LocaleList;", "localeList", "localeSpan", "Landroidx/compose/ui/text/platform/AndroidTextPaint;", "textPaint", "Lkotlin/j;", "setTextLocales", "<init>", "()V", "ui-text_release"}, k = 1, mv = {1, 8, 0})
+public final class LocaleListHelperMethods {
+    public static final LocaleListHelperMethods INSTANCE = new LocaleListHelperMethods();
+
+    private LocaleListHelperMethods() {
+    }
+
+    @DoNotInline
+    @RequiresApi(24)
+    public final Object localeSpan(LocaleList localeList) {
+        m.h(localeList, "localeList");
+        ArrayList arrayList = new ArrayList(a.Q0(localeList, 10));
+        Iterator<Locale> it = localeList.iterator();
+        while (it.hasNext()) {
+            arrayList.add(LocaleExtensions_androidKt.toJavaLocale(it.next()));
+        }
+        java.util.Locale[] localeArr = (java.util.Locale[]) arrayList.toArray(new java.util.Locale[0]);
+        return new LocaleSpan(new android.os.LocaleList((java.util.Locale[]) Arrays.copyOf(localeArr, localeArr.length)));
+    }
+
+    @DoNotInline
+    @RequiresApi(24)
+    public final void setTextLocales(AndroidTextPaint androidTextPaint, LocaleList localeList) {
+        m.h(androidTextPaint, "textPaint");
+        m.h(localeList, "localeList");
+        ArrayList arrayList = new ArrayList(a.Q0(localeList, 10));
+        Iterator<Locale> it = localeList.iterator();
+        while (it.hasNext()) {
+            arrayList.add(LocaleExtensions_androidKt.toJavaLocale(it.next()));
+        }
+        java.util.Locale[] localeArr = (java.util.Locale[]) arrayList.toArray(new java.util.Locale[0]);
+        androidTextPaint.setTextLocales(new android.os.LocaleList((java.util.Locale[]) Arrays.copyOf(localeArr, localeArr.length)));
+    }
+}
