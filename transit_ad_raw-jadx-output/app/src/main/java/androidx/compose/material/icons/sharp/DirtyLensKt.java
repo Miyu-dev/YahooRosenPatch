@@ -1,0 +1,71 @@
+package androidx.compose.material.icons.sharp;
+
+import a6.h;
+import androidx.appcompat.R;
+import androidx.appcompat.graphics.drawable.a;
+import androidx.appcompat.widget.s;
+import androidx.compose.material.icons.Icons;
+import androidx.compose.ui.graphics.Color;
+import androidx.compose.ui.graphics.SolidColor;
+import androidx.compose.ui.graphics.StrokeCap;
+import androidx.compose.ui.graphics.StrokeJoin;
+import androidx.compose.ui.graphics.vector.ImageVector;
+import androidx.compose.ui.graphics.vector.PathBuilder;
+import androidx.compose.ui.graphics.vector.VectorKt;
+import androidx.compose.ui.unit.Dp;
+import c.e;
+import kotlin.Metadata;
+import kotlin.jvm.internal.m;
+
+/* JADX INFO: compiled from: DirtyLens.kt */
+/* JADX INFO: loaded from: C:\ClaudeWork\YahoRsen\YahooRosenPatch\tmp\patching-1782388517898\patched\originalDex\classes.dex */
+@Metadata(d1 = {"\u0000\u0010\n\u0000\n\u0002\u0018\u0002\n\u0000\n\u0002\u0018\u0002\n\u0002\b\u0003\"\u0010\u0010\u0000\u001a\u0004\u0018\u00010\u0001X\u0082\u000e¢\u0006\u0002\n\u0000\"\u0015\u0010\u0002\u001a\u00020\u0001*\u00020\u00038F¢\u0006\u0006\u001a\u0004\b\u0004\u0010\u0005¨\u0006\u0006"}, d2 = {"_dirtyLens", "Landroidx/compose/ui/graphics/vector/ImageVector;", "DirtyLens", "Landroidx/compose/material/icons/Icons$Sharp;", "getDirtyLens", "(Landroidx/compose/material/icons/Icons$Sharp;)Landroidx/compose/ui/graphics/vector/ImageVector;", "material-icons-extended-sharp_release"}, k = 2, mv = {1, 8, 0}, xi = R.styleable.AppCompatTheme_checkboxStyle)
+public final class DirtyLensKt {
+    private static ImageVector _dirtyLens;
+
+    public static final ImageVector getDirtyLens(Icons.Sharp sharp) {
+        m.h(sharp, "<this>");
+        ImageVector imageVector = _dirtyLens;
+        if (imageVector != null) {
+            m.e(imageVector);
+            return imageVector;
+        }
+        ImageVector.Builder builder = new ImageVector.Builder("Sharp.DirtyLens", Dp.m5267constructorimpl(24.0f), Dp.m5267constructorimpl(24.0f), 24.0f, 24.0f, 0L, 0, false, 224, null);
+        int defaultFillType = VectorKt.getDefaultFillType();
+        SolidColor solidColor = new SolidColor(Color.INSTANCE.m2844getBlack0d7_KjU(), null);
+        int iM3141getButtKaPHkGw = StrokeCap.INSTANCE.m3141getButtKaPHkGw();
+        int iM3151getBevelLxFBmk8 = StrokeJoin.INSTANCE.m3151getBevelLxFBmk8();
+        PathBuilder pathBuilderC = s.c(22.0f, 5.0f, -5.17f, 15.0f, 3.0f);
+        e.g(pathBuilderC, 9.0f, 7.17f, 5.0f, 2.0f);
+        a.h(pathBuilderC, 16.0f, 20.0f, 5.0f);
+        pathBuilderC.moveTo(16.66f, 16.58f);
+        pathBuilderC.curveToRelative(-1.14f, 1.86f, -3.0f, -1.03f, -3.81f, 0.09f);
+        pathBuilderC.curveToRelative(-0.39f, 0.57f, -0.09f, 1.49f, 0.13f, 2.33f);
+        pathBuilderC.curveToRelative(0.0f, 0.47f, -0.38f, 0.85f, -0.85f, 0.85f);
+        pathBuilderC.curveToRelative(-0.47f, 0.0f, -0.86f, -0.38f, -0.86f, -0.85f);
+        pathBuilderC.curveToRelative(0.14f, -0.98f, 0.42f, -2.05f, -0.16f, -2.43f);
+        pathBuilderC.curveToRelative(-0.89f, -0.59f, -1.27f, 2.06f, -2.8f, 1.35f);
+        pathBuilderC.curveToRelative(-1.39f, -1.12f, 1.05f, -1.29f, 0.5f, -3.27f);
+        pathBuilderC.curveToRelative(-0.22f, -0.79f, -2.28f, 0.36f, -2.4f, -1.24f);
+        pathBuilderC.curveToRelative(-0.08f, -1.0f, 1.49f, -0.74f, 1.51f, -1.49f);
+        pathBuilderC.curveToRelative(0.03f, -0.75f, -1.03f, -1.05f, -0.25f, -1.91f);
+        pathBuilderC.curveToRelative(0.22f, -0.24f, 0.71f, -0.26f, 0.91f, -0.19f);
+        pathBuilderC.curveToRelative(0.79f, 0.27f, 1.55f, 1.82f, 2.51f, 1.19f);
+        pathBuilderC.curveToRelative(1.03f, -0.66f, -1.88f, -2.35f, 0.0f, -2.86f);
+        pathBuilderC.curveToRelative(1.64f, -0.44f, 1.31f, 2.08f, 2.65f, 2.44f);
+        pathBuilderC.curveToRelative(1.94f, 0.52f, 2.65f, -4.55f, 4.41f, -2.33f);
+        pathBuilderC.curveToRelative(1.85f, 2.33f, -3.43f, 2.27f, -2.85f, 4.01f);
+        pathBuilderC.curveToRelative(0.34f, 1.01f, 2.15f, -1.2f, 2.76f, 0.53f);
+        pathBuilderC.curveToRelative(0.64f, 1.83f, -3.09f, 0.82f, -3.04f, 1.66f);
+        pathBuilderC.curveTo(15.08f, 15.29f, 17.43f, 15.01f, 16.66f, 16.58f);
+        pathBuilderC.close();
+        pathBuilderC.moveTo(18.14f, 18.01f);
+        pathBuilderC.curveToRelative(-0.47f, 0.0f, -0.86f, -0.38f, -0.86f, -0.86f);
+        pathBuilderC.reflectiveCurveToRelative(0.38f, -0.86f, 0.86f, -0.86f);
+        pathBuilderC.curveToRelative(0.47f, 0.0f, 0.86f, 0.38f, 0.86f, 0.86f);
+        ImageVector imageVectorBuild = ImageVector.Builder.m3359addPathoIyEayM$default(builder, h.t(pathBuilderC, 18.62f, 18.01f, 18.14f, 18.01f), defaultFillType, "", solidColor, 1.0f, null, 1.0f, 1.0f, iM3141getButtKaPHkGw, iM3151getBevelLxFBmk8, 1.0f, 0.0f, 0.0f, 0.0f, 14336, null).build();
+        _dirtyLens = imageVectorBuild;
+        m.e(imageVectorBuild);
+        return imageVectorBuild;
+    }
+}

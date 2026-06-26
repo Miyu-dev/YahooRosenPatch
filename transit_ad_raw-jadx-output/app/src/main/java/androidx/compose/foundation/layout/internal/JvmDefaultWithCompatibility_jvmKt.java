@@ -1,0 +1,11 @@
+package androidx.compose.foundation.layout.internal;
+
+import kotlin.Metadata;
+
+/* JADX INFO: compiled from: JvmDefaultWithCompatibility.jvm.kt */
+/* JADX INFO: loaded from: C:\ClaudeWork\YahoRsen\YahooRosenPatch\tmp\patching-1782388517898\patched\originalDex\classes.dex */
+@Metadata(d1 = {"\u0000\b\n\u0002\u0010\u0000\n\u0002\b\u0002*\f\b\u0000\u0010\u0001\"\u00020\u00002\u00020\u0000¨\u0006\u0002"}, d2 = {"", "JvmDefaultWithCompatibility", "foundation-layout_release"}, k = 2, mv = {1, 8, 0})
+public final class JvmDefaultWithCompatibility_jvmKt {
+    public static /* synthetic */ void JvmDefaultWithCompatibility$annotations() {
+    }
+}

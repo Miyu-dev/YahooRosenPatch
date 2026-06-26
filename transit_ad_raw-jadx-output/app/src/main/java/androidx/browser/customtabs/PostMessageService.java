@@ -1,0 +1,30 @@
+package androidx.browser.customtabs;
+
+import android.app.Service;
+import android.content.Intent;
+import android.os.Bundle;
+import android.os.IBinder;
+import android.support.customtabs.c;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+
+/* JADX INFO: loaded from: C:\ClaudeWork\YahoRsen\YahooRosenPatch\tmp\patching-1782388517898\patched\originalDex\classes.dex */
+public class PostMessageService extends Service {
+    private c.a mBinder = new c.a() { // from class: androidx.browser.customtabs.PostMessageService.1
+        @Override // android.support.customtabs.c
+        public void onMessageChannelReady(@NonNull android.support.customtabs.a aVar, @Nullable Bundle bundle) {
+            aVar.onMessageChannelReady(bundle);
+        }
+
+        @Override // android.support.customtabs.c
+        public void onPostMessage(@NonNull android.support.customtabs.a aVar, @NonNull String str, @Nullable Bundle bundle) {
+            aVar.onPostMessage(str, bundle);
+        }
+    };
+
+    @Override // android.app.Service
+    @NonNull
+    public IBinder onBind(@Nullable Intent intent) {
+        return this.mBinder;
+    }
+}

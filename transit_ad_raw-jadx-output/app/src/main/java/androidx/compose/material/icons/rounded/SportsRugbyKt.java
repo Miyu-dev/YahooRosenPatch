@@ -1,0 +1,60 @@
+package androidx.compose.material.icons.rounded;
+
+import androidx.appcompat.R;
+import androidx.browser.browseractions.a;
+import androidx.compose.material.icons.Icons;
+import androidx.compose.ui.graphics.Color;
+import androidx.compose.ui.graphics.SolidColor;
+import androidx.compose.ui.graphics.StrokeCap;
+import androidx.compose.ui.graphics.StrokeJoin;
+import androidx.compose.ui.graphics.vector.ImageVector;
+import androidx.compose.ui.graphics.vector.PathBuilder;
+import androidx.compose.ui.graphics.vector.VectorKt;
+import androidx.compose.ui.unit.Dp;
+import kotlin.Metadata;
+import kotlin.jvm.internal.m;
+
+/* JADX INFO: compiled from: SportsRugby.kt */
+/* JADX INFO: loaded from: C:\ClaudeWork\YahoRsen\YahooRosenPatch\tmp\patching-1782388517898\patched\originalDex\classes.dex */
+@Metadata(d1 = {"\u0000\u0010\n\u0000\n\u0002\u0018\u0002\n\u0000\n\u0002\u0018\u0002\n\u0002\b\u0003\"\u0010\u0010\u0000\u001a\u0004\u0018\u00010\u0001X\u0082\u000e¢\u0006\u0002\n\u0000\"\u0015\u0010\u0002\u001a\u00020\u0001*\u00020\u00038F¢\u0006\u0006\u001a\u0004\b\u0004\u0010\u0005¨\u0006\u0006"}, d2 = {"_sportsRugby", "Landroidx/compose/ui/graphics/vector/ImageVector;", "SportsRugby", "Landroidx/compose/material/icons/Icons$Rounded;", "getSportsRugby", "(Landroidx/compose/material/icons/Icons$Rounded;)Landroidx/compose/ui/graphics/vector/ImageVector;", "material-icons-extended-rounded_release"}, k = 2, mv = {1, 8, 0}, xi = R.styleable.AppCompatTheme_checkboxStyle)
+public final class SportsRugbyKt {
+    private static ImageVector _sportsRugby;
+
+    public static final ImageVector getSportsRugby(Icons.Rounded rounded) {
+        m.h(rounded, "<this>");
+        ImageVector imageVector = _sportsRugby;
+        if (imageVector != null) {
+            m.e(imageVector);
+            return imageVector;
+        }
+        ImageVector.Builder builder = new ImageVector.Builder("Rounded.SportsRugby", Dp.m5267constructorimpl(24.0f), Dp.m5267constructorimpl(24.0f), 24.0f, 24.0f, 0L, 0, false, 224, null);
+        int defaultFillType = VectorKt.getDefaultFillType();
+        SolidColor solidColor = new SolidColor(Color.INSTANCE.m2844getBlack0d7_KjU(), null);
+        int iM3141getButtKaPHkGw = StrokeCap.INSTANCE.m3141getButtKaPHkGw();
+        int iM3151getBevelLxFBmk8 = StrokeJoin.INSTANCE.m3151getBevelLxFBmk8();
+        PathBuilder pathBuilderD = a.d(20.49f, 3.51f);
+        pathBuilderD.curveToRelative(-0.56f, -0.56f, -2.15f, -0.97f, -4.16f, -0.97f);
+        pathBuilderD.curveToRelative(-3.08f, 0.0f, -7.15f, 0.96f, -9.98f, 3.79f);
+        pathBuilderD.curveTo(1.66f, 11.03f, 2.1f, 19.07f, 3.51f, 20.49f);
+        pathBuilderD.curveToRelative(0.56f, 0.56f, 2.15f, 0.97f, 4.16f, 0.97f);
+        pathBuilderD.curveToRelative(3.08f, 0.0f, 7.15f, -0.96f, 9.98f, -3.79f);
+        pathBuilderD.curveTo(22.34f, 12.97f, 21.9f, 4.93f, 20.49f, 3.51f);
+        pathBuilderD.close();
+        pathBuilderD.moveTo(7.76f, 7.76f);
+        pathBuilderD.curveToRelative(2.64f, -2.64f, 6.35f, -3.12f, 8.03f, -3.19f);
+        pathBuilderD.curveToRelative(-2.05f, 0.94f, -4.46f, 2.45f, -6.61f, 4.61f);
+        pathBuilderD.curveToRelative(-2.16f, 2.16f, -3.67f, 4.58f, -4.61f, 6.63f);
+        pathBuilderD.curveTo(4.66f, 13.33f, 5.44f, 10.07f, 7.76f, 7.76f);
+        pathBuilderD.close();
+        pathBuilderD.moveTo(16.24f, 16.24f);
+        pathBuilderD.curveToRelative(-2.64f, 2.64f, -6.35f, 3.12f, -8.03f, 3.19f);
+        pathBuilderD.curveToRelative(2.05f, -0.94f, 4.46f, -2.45f, 6.61f, -4.61f);
+        pathBuilderD.curveToRelative(2.16f, -2.16f, 3.67f, -4.58f, 4.62f, -6.63f);
+        pathBuilderD.curveTo(19.34f, 10.67f, 18.56f, 13.93f, 16.24f, 16.24f);
+        pathBuilderD.close();
+        ImageVector imageVectorBuild = ImageVector.Builder.m3359addPathoIyEayM$default(builder, pathBuilderD.getNodes(), defaultFillType, "", solidColor, 1.0f, null, 1.0f, 1.0f, iM3141getButtKaPHkGw, iM3151getBevelLxFBmk8, 1.0f, 0.0f, 0.0f, 0.0f, 14336, null).build();
+        _sportsRugby = imageVectorBuild;
+        m.e(imageVectorBuild);
+        return imageVectorBuild;
+    }
+}
